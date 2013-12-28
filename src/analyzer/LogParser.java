@@ -67,6 +67,7 @@ public class LogParser {
 	public static void main(String[] args) {
 		//if (trim == null || trim.length() == 0) return null;
 		//Pattern pattern = Pattern.compile("(.*) (.*) \\[(.*)\\] (\\d+) (\\d+) (\\d+) (\\d+) \\\"(.*)\\\" \\\"(.*)\\\" \\\"(.*)\\\"(.*)?");
+		System.out.println("test");
 		String str = "182.129.215.39 hxydbd.duapp.com [2013-12-16 18:10:44] 404 1565 345 0 \"GET /favicon.ico HTTP/1.1\" \"\" \"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36\" pgv_pvi=6691857464;";
 		
 		Matcher matcher = pattern.matcher(str);

@@ -14,10 +14,13 @@ public class Analyzer {
 	
 	public static void main(String[] args) throws IOException {
 		init();
+		System.out.println("begin to parse files...");
 		List<File> flist = getFileList();
 		for  (File file : flist) {
+			System.out.println("begin to analyze : " +  file.getName());
 			doAnalyze(file);
 		}
+		System.out.println("finish!");
 		destroy();
 	}
 
@@ -26,6 +29,7 @@ public class Analyzer {
 	}
 
 	private static void init() throws IOException {
+		System.out.println("initial...");
 		LogParser.init();
 		Outputer.init();
 	}
