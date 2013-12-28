@@ -5,24 +5,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Log;
 
 public class Analyzer {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		init();
 		List<File> flist = getFileList();
 		for  (File file : flist) {
 			doAnalyze(file);
-			
 		}
+		destroy();
 	}
 
-	private static void init() {
-		File target = new File("data");
-		if  (!target.exists()) target.mkdirs();		
+	private static void destroy() throws IOException {
+		LogParser.destroy();
+	}
+
+	private static void init() throws IOException {
+		LogParser.init();
+		Outputer.init();
 	}
 
 	private static void doAnalyze(File file) {
@@ -36,7 +41,6 @@ public class Analyzer {
 					Outputer.output(log);
 				};
 				str =  bin.readLine();
-				
 			}
 			bin.close();
 		} catch (FileNotFoundException e) {
@@ -49,7 +53,28 @@ public class Analyzer {
 	}
 
 	private static List<File> getFileList() {
-		return null;
+		List<File> rst =  new LinkedList<File>();
+		File file = new File("file.config");
+		
+		try {
+			BufferedReader bin = new BufferedReader(new FileReader(file));
+			String str = bin.readLine();
+			while (str !=  null){
+				if (str.trim().length() != 0){
+					File infile =  new File(str);
+					if  (infile.exists()) rst.add(infile);
+				}
+				str = bin.readLine();
+			}
+			bin.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rst;
 	}
 
 }
